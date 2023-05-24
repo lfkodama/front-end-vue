@@ -86,7 +86,7 @@
         "Bacon",
         "Tomate"
       ],
-      "status": "Finalizado",
+      "status": "Solicitado",
       "id": 4
     },
     {
@@ -98,7 +98,7 @@
         "Cebola roxa",
         "Tomate"
       ],
-      "status": "Em produção",
+      "status": "Finalizado",
       "id": 5
     }
   ]
