@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
+import firebase from "firebase";
+import "firebase/auth";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import SignUpView from "@/views/SignUpView.vue";
@@ -12,6 +14,9 @@ const router = new Router({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: {
+        requireAuth: true,
+      },
     },
     {
       path: "/about",
@@ -33,6 +38,15 @@ const router = new Router({
       component: SignUpView,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next("LoginView");
+  else if (!requiresAuth && currentUser) next("HomeView");
+  else next();
 });
 
 export default router;
