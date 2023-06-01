@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import firebase from "firebase";
-import "firebase/auth";
+import { getAuth } from "firebase/auth";
+
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import SignUpView from "@/views/SignUpView.vue";
@@ -41,7 +41,8 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser;
+  const auth = getAuth();
+  const currentUser = auth().currentUser;
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
   if (requiresAuth && !currentUser) next("LoginView");

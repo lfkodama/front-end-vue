@@ -7,11 +7,10 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import "firebase/auth";
+import { getAuth } from "firebase/auth";
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-
+const auth = getAuth();
 export default {
   name: "HomeView",
   components: {
@@ -19,8 +18,7 @@ export default {
   },
   methods: {
     logout: function () {
-      firebase
-        .auth()
+      auth()
         .signOut()
         .then(() => {
           this.$router.replace("LoginView");
