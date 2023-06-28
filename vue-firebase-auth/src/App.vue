@@ -1,16 +1,21 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link>
-    <router-link to="/feed">Feed</router-link>
-    <router-link to="/register">Register</router-link>
-    <router-link to="/sign-in">Login</router-link>
-    <router-link to="/about">About</router-link>
+    <span> <router-link to="/feed"> Feed </router-link> | </span>
+    <span v-if="isLoggedIn">
+      <button @click="handleSignOut">Logout</button>
+    </span>
+    <span v-else>
+      <router-link to="/register">Register</router-link>
+      <router-link to="/sign-in">Login</router-link>
+      <router-link to="/about">About</router-link>
+    </span>
   </nav>
   <router-view />
 </template>
 
 <script setup>
-import { ref, watchEffect } from "vue"; // used for conditional rendering
+import { ref } from "vue"; // used for conditional rendering
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
 
@@ -40,18 +45,6 @@ const handleSignOut = () => {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+  margin-top: 60px;
 }
 </style>

@@ -2,7 +2,6 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { initializeApp } from "firebase/app";
-
 import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -17,8 +16,8 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-if (location.hostname === "localhost") {
-  connectAuthEmulator(getAuth(), "http://localhost:9099");
+if (location.hostname === "127.0.0.1") {
+  connectAuthEmulator(getAuth(), "http://127.0.0.1:9099");
 }
 
 const app = createApp(App);
